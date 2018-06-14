@@ -78,7 +78,7 @@ def video_parser(filepath):
     face_cascade = cv2.CascadeClassifier("./model/haarcascade_frontalface_default.xml")
     result_json = []
     ad_collector = []
-    print("视频分析实验平台分镜处理")
+    print("Video analysis and experimental platform is running")
     # param set : the num of frame in every shot
     # video Capture
     videoCapture = cv2.VideoCapture(filepath)
@@ -186,7 +186,7 @@ def video_parser(filepath):
 
                                 text_in = json.dumps(result_json)
                                 ad_spots.write(text_in)
-                                print('-----------------正在进行视频人脸定位，请稍后---------------')
+                                print('-----------------Video face location is being performed, please wait---------------')
 
                         if flag == True:
                             image_selected_pos = cur_image_id - (interval_count - num - 1)
@@ -213,7 +213,7 @@ def video_parser(filepath):
     seconds = end - start
     hours_formatting, minutes_formatting, seconds_formatting = times_formatting(seconds)
 
-    print("视频分析完成，消耗时长: %s : %s : %s" % (hours_formatting, minutes_formatting, seconds_formatting))
+    print("Video analysis completed, consumption time: %s : %s : %s" % (hours_formatting, minutes_formatting, seconds_formatting))
     sort_by_weight(file_name)
     generate_stdFile(file_name, generate_file_path + file_name)
 
@@ -228,7 +228,7 @@ def generate_stdFile(file_name, path):
         with codecs.open(final_file, 'w+', encoding='utf-8') as std_file:
 
             std_file.write(
-                "片名" + "," + "入点时间" + "," + "出点时间" + "," + "片段时长" + "," + "广告位类别" + "," + "置信度"
+                "title" + "," + "entry time" + "," + "exit time" + "," + "duration" + "," + "figure" + "," + "confidence"
             )
 
             std_file.write("\n")
@@ -249,7 +249,7 @@ def generate_stdFile(file_name, path):
                     start_index += foot
                     std_file.write("\n")
 
-        print("{}文件生成，请查看".format(os.path.split(final_file)[1]))
+        print("{} file generation, please check".format(os.path.split(final_file)[1]))
     return
 # translate shot into word, with date, time, frame_id
 def ad_generator(file_name, start_frame_duration, end_frame_duration, image_selected_pos):
